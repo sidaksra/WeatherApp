@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://kit.fontawesome.com/170f096220.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="input-container">
+        <i class="fa fa-search" aria-hidden="true"></i>
+        <input type="text" placeholder="Search a location..." class="search-input">
+        <i class="fa-solid fa-cloud"></i>
+    </div>
+
+    <div class="weather-container">
+        <div class="weather-info">
+            <h2 id="city"></h2>
+            <div class="temperature">
+                <span id="degrees"></span>
+            </div>
+            <div id="date-time">
+                <p id="date"></p>
+            </div>
+        </div>
+        <div>
+            <img src="" alt="Sunny Weather" id="weather-icon">
+            <p id="condition-text"></p>
+        </div>
+    </div>
+    <div class="weather-container-2">
+        <div class="condition-container">
+            <div class="condition-header">
+                <h2>Location Details</h2>
+            </div>
+            <div class="containers-condition">
+                <div>
+                    <p>Country:</p>
+                    <p id="country-Name"></p>
+                </div>
+                <div>  
+                    <p>Latitude:</p>
+                    <p id="lat"></p>
+                </div>
+                <div>
+                    <p>Longitude:</p>
+                    <p id="lon"></p>
+                </div>
+            </div>
+        </div>
+        <div class="condition-container">
+            <div class="condition-header">
+                <h2>Weather Condition</h2>
+                <span id="lastUpdated"></span>
+            </div>
+            
+            <div class="containers-condition">
+                <div>
+                    <i class="fa-solid fa-wind"></i>
+                    <p>Wind Speed</p>
+                    <p id="wind-speed"></p>
+                </div>
+                <div>
+                    <i class="fa-regular fa-compass"></i>
+                    <p>Wind Direction</p>
+                    <p id="wind-dir"></p>
+                </div>
+                <div>
+                    <i class="fa-solid fa-temperature-low"></i>
+                    <p>Feels Like</p>
+                    <p id="feels-like"></p>
+                </div>
+                <div>
+                    <i class="fa-solid fa-droplet"></i>
+                    <p>Precipitation</p>
+                    <p id="precip"></p>
+                </div>
+                <div>
+                    <i class="fa-solid fa-sun"></i>
+                    <p>UV</p>
+                    <p id="uv"></p>
+                </div>
+                <div>
+                    <i class="fa-solid fa-eye"></i>
+                    <p>Visibility</p>
+                    <p id="visibility"></p>
+                </div>
+            </div>
+            
+            
+        </div>
+    </div>
+    <footer>&copy; 2023 All rights reserved. Developed by Sidak Sra</footer>
+    
+</body>
+<script src="main.js"></script>
+</html>

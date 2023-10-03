@@ -1,0 +1,195 @@
+*{
+    margin: 0%;
+    padding: 0%;
+    touch-action: manipulation;
+}
+
+/* Image: <a href="https://www.freepik.com/free-vector/gorgeous-clouds-background-with-blue-sky-design_8562848.htm#query=weather%20background&position=8&from_view=keyword&track=ais">Image by starline</a> on Freepik */
+body{
+    background-image: url(weather.jpg);
+    background-size: cover;
+    height: 100vh;
+    margin-left: 50px;
+    margin-right: 50px;
+
+}
+
+.fa-cloud{
+    position: absolute;
+    right: 60px;
+    top: 40px;
+    font-size: 60px;
+    color: ghostwhite;
+    animation: cloud 2s ease-in-out infinite;
+}
+@keyframes cloud {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-5px);
+    }
+}
+
+
+/* Styling for the input field */
+.search-input {
+    margin-top: 50px;
+    background-color: rgba(255, 255, 255, 0.5);
+    border: none;
+    outline: none;
+    padding: 10px 80px 10px 40px;
+    color: #333;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: 400;
+    position: relative;
+}
+
+.fa-search{
+    left:62px;
+    top: 61px;
+    color: rgb(220, 220, 220);
+    position: absolute;
+}
+
+.input-container{
+    display: flex;
+    align-items: baseline;
+}
+.weather-container{
+    border-radius: 5px;
+    margin-top: 50px;
+    background-color: rgba(4, 79, 111, 0.5);
+    padding: 2em;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+}
+
+/* Styles for the weather information */
+.weather-info {
+    text-align: left;
+}
+
+#city {
+    font-size: 35px;
+    color: rgb(238, 238, 238);
+    margin-bottom: 10px;
+}
+
+.temperature {
+    font-size: 50px;
+    font-weight: bold;
+    color: white;
+}
+
+#date-time {
+    margin-top: 30px;
+    display: flex;
+    gap: 20px;
+}
+#date, #time {
+    font-size: 18px;
+    color: #e0e0e0;
+}
+
+/* Style for the weather icon */
+#weather-icon {
+    max-width: 100px;
+    height: auto;
+}
+.weather-container-2{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: stretch;
+    gap:50px;
+}
+.weather-container-2 > div{
+    border-radius: 5px;
+    margin-top: 50px;
+    background-color: rgba(4, 79, 111, 0.6);
+    padding: 2em;
+    width: 50%;
+    color: white;
+}
+.condition-container div{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: stretch;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+.condition-header{
+    margin-bottom: 50px;
+}
+.lastUpdated{
+    font-size: 18px;
+    
+}
+
+.fa-wind, .fa-compass, .fa-temperature-low, .fa-droplet, .fa-sun, .fa-eye{
+    color: ghostwhite;
+}
+
+.containers-condition >div{
+    display: flex;
+    width: 20%;
+    flex-direction: column;
+    align-items: center;
+    gap:20px;
+    background-color: rgba(4, 79, 111, 0.9);
+    padding: 1em;
+}
+
+#condition-text{
+    color: whitesmoke;
+    text-align: center;
+    font-size: 22px;
+}
+footer{
+   text-align: center;
+   margin-top: 50px;
+}
+
+@media screen and (max-width:950px) {
+
+    .weather-container-2 {
+        flex-wrap: wrap;
+        gap: 0px;
+    }
+    .weather-container-2 > div{
+        width: 100%;
+    }
+    
+}
+
+@media screen and (max-width:450px) {
+    .fa-cloud{
+        right: 20px;
+    }
+    .search-input{
+        padding: 10px 0px 10px 40px
+    }
+    .containers-condition >div{
+        width: 33%;
+        text-align: center;
+    }
+    .weather-container{
+        align-items: flex-start;
+    }
+    #date, #time {
+        width: max-content;
+    }
+    body{
+        margin-left: 20px;
+        margin-right: 20px;
+    }
+    .fa-search {
+        left: 32px;
+    }
+
+}
