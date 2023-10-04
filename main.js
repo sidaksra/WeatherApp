@@ -11,6 +11,7 @@ document.addEventListener("DOMContentLoaded", function(){
     const getCurrentLocation = document.getElementById('currentLocation')
     const loadingSpinner = document.getElementById('loading-spinner');
     const gobutton = document.getElementById("go")
+    const errorClass = document.querySelector('.error')
 
     const searchInput = document.querySelector('.search-input');
     const get_city = document.getElementById('city');
@@ -28,11 +29,10 @@ document.addEventListener("DOMContentLoaded", function(){
     const get_uv = document.getElementById('uv');
     const get_vis = document.getElementById('visibility');
     const get_condition = document.getElementById('condition-text');
-    
+    errorClass.innerText = '';
     const fetchData = async(target)=>{
         try{
-            
-
+            errorClass.innerText = '';
             const url = `https://api.weatherapi.com/v1/current.json?key=1ce93c39566b4c0491c103042230310&q=${target}`
             const response = await fetch(url)
         
@@ -55,7 +55,7 @@ document.addEventListener("DOMContentLoaded", function(){
 
     const handleFetchError = (statusCode) => {
         if (statusCode === 400) {
-            alert('Location not found. Please enter a valid city or country name.');
+            errorClass.innerText = 'Location not found. Please enter a valid city name.';
         } else {
             throw new Error('Failed to fetch data. Please try again later.');
         }
@@ -155,17 +155,20 @@ document.addEventListener("DOMContentLoaded", function(){
     });
 
     gobutton.addEventListener("click", function(){
+        errorClass.innerText = ""
         const inputValue = searchInput.value.trim().toLowerCase();
         if (inputValue !== '') {
             fetchData(inputValue); // Call the fetchData function with the entered city name
             searchInput.value = '';
         }
         else{
-            alert("Please Input a Location!")
+            errorClass.innerText = "Please Input a Location!"
+            
         }
     })
 
     getCurrentLocation.addEventListener("click", function(){
+        errorClass.innerText = ""
         getUserLocation()
     })
    
@@ -180,17 +183,18 @@ document.addEventListener("DOMContentLoaded", function(){
                 lon = position.coords.longitude;
 
                 target = `${lat},${lon}`;
+                errorClass.innerText = '';
                 fetchData(target)
                 
             },function (error) {
                 console.error('Error getting user location:', error);
-                alert("Geolocation is not supported by your browser. Please enter a location manually")
-                    // Hide the loading spinner when data is fetched (whether successful or not)
-                    loadingSpinner.style.display = 'none';
+                errorClass.innerText = "Error: Please Enable Location or Enter Manually"
+                // Hide the loading spinner when data is fetched (whether successful or not)
+                loadingSpinner.style.display = 'none';
             });
            
         } else {
-            alert('Geolocation is not supported by your browser. Please enter a location manually.');
+            errorClass.innerText = "Error: Geolocation not supported by the browser. Please Enter Manually"
              // Hide the loading spinner when data is fetched (whether successful or not)
              loadingSpinner.style.display = 'none';
         }

@@ -261,3 +261,10 @@ footer{
     100% { transform: rotate(360deg); }
 }
   
+.error{
+    display: flex;
+    margin-top: 10px;
+    color: #ab1010;
+    font-size: 18px;
+    font-weight: bold;
+}
