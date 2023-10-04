@@ -185,10 +185,14 @@ document.addEventListener("DOMContentLoaded", function(){
             },function (error) {
                 console.error('Error getting user location:', error);
                 alert("Geolocation is not supported by your browser. Please enter a location manually")
+                    // Hide the loading spinner when data is fetched (whether successful or not)
+                    loadingSpinner.style.display = 'none';
             });
            
         } else {
             alert('Geolocation is not supported by your browser. Please enter a location manually.');
+             // Hide the loading spinner when data is fetched (whether successful or not)
+             loadingSpinner.style.display = 'none';
         }
     }
  
