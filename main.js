@@ -160,6 +160,9 @@ document.addEventListener("DOMContentLoaded", function(){
             fetchData(inputValue); // Call the fetchData function with the entered city name
             searchInput.value = '';
         }
+        else{
+            alert("Please Input a Location!")
+        }
     })
 
     getCurrentLocation.addEventListener("click", function(){
