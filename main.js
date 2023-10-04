@@ -30,6 +30,8 @@ document.addEventListener("DOMContentLoaded", function(){
     
     const fetchData = async(target)=>{
         try{
+            // Show the loading spinner while fetching the current location data
+            loadingSpinner.style.display = 'block';
 
             const url = `https://api.weatherapi.com/v1/current.json?key=1ce93c39566b4c0491c103042230310&q=${target}`
             const response = await fetch(url)
@@ -166,8 +168,7 @@ document.addEventListener("DOMContentLoaded", function(){
 
                 target = `${lat},${lon}`;
                 fetchData(target)
-                // Show the loading spinner while fetching the current location data
-                loadingSpinner.style.display = 'block';
+                
             },function (error) {
                 console.error('Error getting user location:', error);
                 alert("Geolocation is not supported by your browser. Please enter a location manually")
