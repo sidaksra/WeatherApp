@@ -166,13 +166,13 @@ document.addEventListener("DOMContentLoaded", function(){
 
                 target = `${lat},${lon}`;
                 fetchData(target)
+                // Show the loading spinner while fetching the current location data
+                loadingSpinner.style.display = 'block';
             },function (error) {
                 console.error('Error getting user location:', error);
-                target = "Canada"
-                fetchData(target)
+                alert("Geolocation is not supported by your browser. Please enter a location manually")
             });
-            // Show the loading spinner while fetching the current location data
-            loadingSpinner.style.display = 'block';
+           
         } else {
             alert('Geolocation is not supported by your browser. Please enter a location manually.');
         }
