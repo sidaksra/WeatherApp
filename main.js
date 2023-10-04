@@ -4,9 +4,12 @@ document.addEventListener("DOMContentLoaded", function(){
 
     let lon = -79.42; 
     let lat = 43.67;
-    let target;
+    let target = "Canada";
     let map;
     let markerGroup = L.layerGroup(); // Create a layer group for markers
+
+    const getCurrentLocation = document.getElementById('currentLocation')
+    const loadingSpinner = document.getElementById('loading-spinner');
 
     const searchInput = document.querySelector('.search-input');
     const get_city = document.getElementById('city');
@@ -25,28 +28,6 @@ document.addEventListener("DOMContentLoaded", function(){
     const get_vis = document.getElementById('visibility');
     const get_condition = document.getElementById('condition-text');
     
-    getUserLocation()
-
-    // Function to get user's current location
-    function getUserLocation() {
-
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(function (position) {
-                lat = position.coords.latitude;
-                lon = position.coords.longitude;
-
-                target = `${lat},${lon}`;
-                fetchData(target)
-            },function (error) {
-                console.error('Error getting user location:', error);
-                target = "Canada"
-                fetchData(target)
-            });
-        } else {
-            alert('Geolocation is not supported by your browser. Please enter a location manually.');
-        }
-    }
-
     const fetchData = async(target)=>{
         try{
 
@@ -58,10 +39,13 @@ document.addEventListener("DOMContentLoaded", function(){
                 return;
             }
             const data = await response.json()
-            await storeData(data)
+            storeData(data)
         }
         catch(error){
             console.error('Error fetching data:', error);
+        }finally {
+            // Hide the loading spinner when data is fetched (whether successful or not)
+            loadingSpinner.style.display = 'none';
         }
         
     
@@ -76,11 +60,11 @@ document.addEventListener("DOMContentLoaded", function(){
     };
     
 
-    const storeData = async(data) => {
+    const storeData = (data) => {
         
         const { location, current } = data;
 
-        await updateDom(
+        updateDom(
             location.country,
             location.localtime,
             current.temp_c,
@@ -106,7 +90,7 @@ document.addEventListener("DOMContentLoaded", function(){
        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
      }).addTo(map);
 
-    const updateDom = async(
+    const updateDom = (
         country,
         last_update,
         temp,
@@ -156,6 +140,8 @@ document.addEventListener("DOMContentLoaded", function(){
         map.setView([lat, lon]);
     };
 
+    fetchData(target)
+
     searchInput.addEventListener('keyup', function (event) {
         if (event.key === 'Enter') {
         const inputValue = searchInput.value.trim().toLowerCase();
@@ -164,6 +150,33 @@ document.addEventListener("DOMContentLoaded", function(){
             }
         }
     });
+
+    getCurrentLocation.addEventListener("click", function(){
+        getUserLocation()
+    })
+   
+
+    // Function to get user's current location
+    function getUserLocation() {
+
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function (position) {
+                lat = position.coords.latitude;
+                lon = position.coords.longitude;
+
+                target = `${lat},${lon}`;
+                fetchData(target)
+            },function (error) {
+                console.error('Error getting user location:', error);
+                target = "Canada"
+                fetchData(target)
+            });
+            // Show the loading spinner while fetching the current location data
+            loadingSpinner.style.display = 'block';
+        } else {
+            alert('Geolocation is not supported by your browser. Please enter a location manually.');
+        }
+    }
  
 });
 
