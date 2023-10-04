@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", function(){
 
     let lon = -79.42; 
     let lat = 43.67;
-    let target = "Canada";
+    let target = "Toronto";
     let map;
     let markerGroup = L.layerGroup(); // Create a layer group for markers
 
