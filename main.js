@@ -10,6 +10,7 @@ document.addEventListener("DOMContentLoaded", function(){
 
     const getCurrentLocation = document.getElementById('currentLocation')
     const loadingSpinner = document.getElementById('loading-spinner');
+    const gobutton = document.getElementById("go")
 
     const searchInput = document.querySelector('.search-input');
     const get_city = document.getElementById('city');
@@ -30,8 +31,7 @@ document.addEventListener("DOMContentLoaded", function(){
     
     const fetchData = async(target)=>{
         try{
-            // Show the loading spinner while fetching the current location data
-            loadingSpinner.style.display = 'block';
+            
 
             const url = `https://api.weatherapi.com/v1/current.json?key=1ce93c39566b4c0491c103042230310&q=${target}`
             const response = await fetch(url)
@@ -149,9 +149,18 @@ document.addEventListener("DOMContentLoaded", function(){
         const inputValue = searchInput.value.trim().toLowerCase();
             if (inputValue !== '') {
                 fetchData(inputValue); // Call the fetchData function with the entered city name
+                searchInput.value = ''; 
             }
         }
     });
+
+    gobutton.addEventListener("click", function(){
+        const inputValue = searchInput.value.trim().toLowerCase();
+        if (inputValue !== '') {
+            fetchData(inputValue); // Call the fetchData function with the entered city name
+            searchInput.value = '';
+        }
+    })
 
     getCurrentLocation.addEventListener("click", function(){
         getUserLocation()
@@ -160,7 +169,8 @@ document.addEventListener("DOMContentLoaded", function(){
 
     // Function to get user's current location
     function getUserLocation() {
-
+    // Show the loading spinner while fetching the current location data
+    loadingSpinner.style.display = 'block';
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(function (position) {
                 lat = position.coords.latitude;

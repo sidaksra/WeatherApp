@@ -3,6 +3,25 @@
     padding: 0%;
     touch-action: manipulation;
 }
+input[type="search"]::-webkit-search-cancel-button {
+    display: none;
+  }
+#go{
+    position: absolute;
+    top: 55px;
+    left: 320px;
+    font-size: larger;
+    border: none;
+    background-color: rgb(25, 195, 125);
+    border-radius: 0.2em;
+    cursor: pointer;
+    color: white;
+    padding: 0.2em 0.5em 0.2em 0.5em;
+}
+
+#go:hover{
+    background-color: rgb(20, 173, 109);
+}
 
 #map { 
     height: 150px; 
@@ -192,7 +211,7 @@ footer{
     
 }
 
-@media screen and (max-width:450px) {
+@media screen and (max-width:500px) {
     .fa-cloud{
         right: 20px;
     }
@@ -219,6 +238,9 @@ footer{
     .condition-container div {
         justify-content: center;
         align-items: stretch;
+    }
+    #go{
+        left: 210px;
     }
 
 }
