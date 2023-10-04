@@ -1,8 +1,10 @@
 "use strict";
 
 document.addEventListener("DOMContentLoaded", function(){
+
     let lon = -79.42; 
     let lat = 43.67;
+    let target;
     let map;
     let markerGroup = L.layerGroup(); // Create a layer group for markers
 
@@ -22,20 +24,32 @@ document.addEventListener("DOMContentLoaded", function(){
     const get_uv = document.getElementById('uv');
     const get_vis = document.getElementById('visibility');
     const get_condition = document.getElementById('condition-text');
-
-
-    //Fetch API Data
-    let target = "Toronto"
     
-    // Creating the map 
-    map = L.map('map').setView([lat, lon], 13);
-    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      maxZoom: 9,
-      attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-    }).addTo(map);
+    getUserLocation()
+
+    // Function to get user's current location
+    function getUserLocation() {
+
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function (position) {
+                lat = position.coords.latitude;
+                lon = position.coords.longitude;
+
+                target = `${lat},${lon}`;
+                fetchData(target)
+            },function (error) {
+                console.error('Error getting user location:', error);
+                target = "Canada"
+                fetchData(target)
+            });
+        } else {
+            alert('Geolocation is not supported by your browser. Please enter a location manually.');
+        }
+    }
 
     const fetchData = async(target)=>{
         try{
+
             const url = `https://api.weatherapi.com/v1/current.json?key=1ce93c39566b4c0491c103042230310&q=${target}`
             const response = await fetch(url)
         
@@ -49,6 +63,7 @@ document.addEventListener("DOMContentLoaded", function(){
         catch(error){
             console.error('Error fetching data:', error);
         }
+        
     
     }
 
@@ -61,11 +76,11 @@ document.addEventListener("DOMContentLoaded", function(){
     };
     
 
-    const storeData = (data) => {
+    const storeData = async(data) => {
         
         const { location, current } = data;
 
-        updateDom(
+        await updateDom(
             location.country,
             location.localtime,
             current.temp_c,
@@ -84,8 +99,14 @@ document.addEventListener("DOMContentLoaded", function(){
         );
     };
     
+     // Creating the map 
+     map = L.map('map').setView([lat, lon], 13);
+     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+       maxZoom: 9,
+       attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+     }).addTo(map);
 
-    const updateDom = (
+    const updateDom = async(
         country,
         last_update,
         temp,
@@ -134,9 +155,6 @@ document.addEventListener("DOMContentLoaded", function(){
         // Update the map view to the new marker's position
         map.setView([lat, lon]);
     };
-    
-    fetchData(target);
-    
 
     searchInput.addEventListener('keyup', function (event) {
         if (event.key === 'Enter') {
