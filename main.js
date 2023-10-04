@@ -176,29 +176,36 @@ document.addEventListener("DOMContentLoaded", function(){
     // Function to get user's current location
     function getUserLocation() {
     errorClass.innerText = '';
-        if (navigator.geolocation) {
-            // Show the loading spinner while fetching the current location data
-            loadingSpinner.style.display = 'block';
-            navigator.geolocation.getCurrentPosition(function (position) {
-                lat = position.coords.latitude;
-                lon = position.coords.longitude;
+        try {
+            if (navigator.geolocation) {
+                // Show the loading spinner while fetching the current location data
+                loadingSpinner.style.display = 'block';
+                navigator.geolocation.getCurrentPosition(function (position) {
+                    lat = position.coords.latitude;
+                    lon = position.coords.longitude;
 
-                target = `${lat},${lon}`;
-                errorClass.innerText = '';
-                fetchData(target)
-                
-            },function (error) {
-                console.error('Error getting user location:', error);
-                errorClass.innerText = "Error: Please Enable Location or Enter Manually"
+                    target = `${lat},${lon}`;
+                    errorClass.innerText = '';
+                    fetchData(target)
+                    
+                },function (error) {
+                    console.error('Error getting user location:', error);
+                    errorClass.innerText = "Error: Please Enable Location or Enter Manually"
+                    // Hide the loading spinner when data is fetched (whether successful or not)
+                    loadingSpinner.style.display = 'none';
+                });
+            
+            } else {
+                errorClass.innerText = "Error: Geolocation not supported by the browser. Please Enter Manually"
                 // Hide the loading spinner when data is fetched (whether successful or not)
                 loadingSpinner.style.display = 'none';
-            });
-           
-        } else {
-            errorClass.innerText = "Error: Geolocation not supported by the browser. Please Enter Manually"
-             // Hide the loading spinner when data is fetched (whether successful or not)
-             loadingSpinner.style.display = 'none';
+            }
+            
+        } catch (error) {
+            loadingSpinner.style.display = 'none';
+            errorClass.innerText = "Error Occured. Please try again!"
         }
+        
     }
  
 });
