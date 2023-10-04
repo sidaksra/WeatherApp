@@ -4,6 +4,10 @@
     touch-action: manipulation;
 }
 
+#map { 
+    height: 150px; 
+    width: 100%;}
+
 /* Image: <a href="https://www.freepik.com/free-vector/gorgeous-clouds-background-with-blue-sky-design_8562848.htm#query=weather%20background&position=8&from_view=keyword&track=ais">Image by starline</a> on Freepik */
 body{
     background-image: url(weather.jpg);
@@ -46,10 +50,15 @@ body{
     position: relative;
 }
 
+.search-input::placeholder{
+    color: rgb(0, 0, 0);
+}
+
 .fa-search{
     left:62px;
     top: 61px;
-    color: rgb(220, 220, 220);
+    z-index: 99;
+    color: rgb(0, 0, 0);
     position: absolute;
 }
 
@@ -75,7 +84,7 @@ body{
 
 #city {
     font-size: 35px;
-    color: rgb(238, 238, 238);
+    color: ghostwhite;
     margin-bottom: 10px;
 }
 
@@ -92,7 +101,7 @@ body{
 }
 #date, #time {
     font-size: 18px;
-    color: #e0e0e0;
+    color: #eaeaea;
 }
 
 /* Style for the weather icon */
@@ -119,7 +128,7 @@ body{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    align-items: stretch;
+    align-items: center;
     gap: 10px;
     flex-wrap: wrap;
 }
@@ -190,6 +199,10 @@ footer{
     }
     .fa-search {
         left: 32px;
+    }
+    .condition-container div {
+        justify-content: center;
+        align-items: stretch;
     }
 
 }

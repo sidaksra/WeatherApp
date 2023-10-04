@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Weather App</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="weather.jpg" type="image/x-icon">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+    crossorigin=""/>
     <script src="https://kit.fontawesome.com/170f096220.js" crossorigin="anonymous"></script>
 </head>
 <body>
@@ -25,7 +29,7 @@
             </div>
         </div>
         <div>
-            <img src="" alt="Sunny Weather" id="weather-icon">
+            <img src="" alt="Weather" id="weather-icon">
             <p id="condition-text"></p>
         </div>
     </div>
@@ -47,6 +51,10 @@
                     <p>Longitude:</p>
                     <p id="lon"></p>
                 </div>
+                <div id="map">
+
+                </div>
+
             </div>
         </div>
         <div class="condition-container">
@@ -95,4 +103,7 @@
     
 </body>
 <script src="main.js"></script>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+crossorigin=""></script>
 </html>
