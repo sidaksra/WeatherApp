@@ -175,9 +175,10 @@ document.addEventListener("DOMContentLoaded", function(){
 
     // Function to get user's current location
     function getUserLocation() {
-    // Show the loading spinner while fetching the current location data
-    loadingSpinner.style.display = 'block';
+    errorClass.innerText = '';
         if (navigator.geolocation) {
+            // Show the loading spinner while fetching the current location data
+            loadingSpinner.style.display = 'block';
             navigator.geolocation.getCurrentPosition(function (position) {
                 lat = position.coords.latitude;
                 lon = position.coords.longitude;
